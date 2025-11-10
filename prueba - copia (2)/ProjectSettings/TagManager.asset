@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Suelo
+  - limite
+  - transport
+  - enemigo
+  - moneda
   layers:
   - Default
   - TransparentFX

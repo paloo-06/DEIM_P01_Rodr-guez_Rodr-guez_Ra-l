@@ -1,14 +1,17 @@
+using TMPro;
 using UnityEngine;
 [RequireComponent (typeof(Rigidbody2D))]
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-
+    public TMP_Text Marcadorpuntos;
+    public static int Puntos =5;
     Rigidbody2D rb;
     float velocidad = 4.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb=GetComponent<Rigidbody2D>();
+        Puntos = 0;
+        rb =GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -45,6 +48,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
          Destroy(gameObject);
         
         
+        }
+    }
+   private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "moneda")
+        {
+            Destroy(collision.gameObject);
+            Puntos ++;
+            Marcadorpuntos.text = ":" + Puntos;
         }
     }
 }
