@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using NUnit.Framework;
+
 public class creadorniveles : MonoBehaviour
 {
     private static creadorniveles instance; //se crea un static creadorniveles para generar niveles

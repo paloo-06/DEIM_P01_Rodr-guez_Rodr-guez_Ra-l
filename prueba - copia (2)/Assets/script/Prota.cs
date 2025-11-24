@@ -1,5 +1,5 @@
 using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
 [RequireComponent (typeof(Rigidbody2D))]
 public class NewMonoBehaviourScript : MonoBehaviour
@@ -20,28 +20,26 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // condicion que indica que el persoanje se muecve pa lña derecha
-
+        //Movimiento del peeosnaje qwue sigue eld edo
+        FingerMovement();
+        //Movimiento en la pantalla tactil
+       // ScreenBorderMovement();
+        // el jugador toca la pantalla
+        
         if (Input.GetKeyDown(KeyCode.D))
         {
              transform.Translate(velocidad * Time.deltaTime, 0, 0);
-           rb.linearVelocityX = velocidad;
+           //rb.linearVelocityX = velocidad;
 
         }
-        else if (Input.GetKey(KeyCode.D))//detecta que ya no esta tocando la tecla
-        {
-            rb.linearVelocityX = 0; // cuando ya no lo esta tocando y es 0
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.A))
-       {
-             transform.Translate(-velocidad * Time.deltaTime, 0, 0);
-           rb.linearVelocityX = -velocidad;
-        }
-        else if (Input.GetKey(KeyCode.A))
         {
-            rb.linearVelocityX = 0;
+             transform.Translate(-velocidad * Time.deltaTime, 0, 0);
+           //rb.linearVelocityX = -velocidad;
         }
+       
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             checkbestscore();
@@ -67,6 +65,46 @@ public class NewMonoBehaviourScript : MonoBehaviour
             Marcadorpuntos.text = ":" + Puntos;
         }
     }
+
+    private void FingerMovement()
+    {
+        if (Input.touchCount > 0)
+        {
+            float FingerMovementX = Input.touches[0].deltaPosition.x;
+
+            //movimiento (transform)
+            transform.Translate(FingerMovementX * velocidad * Time.deltaTime, 0, 0);
+            
+        }
+
+
+
+
+    }
+    private void ScreenBorderMovement()
+    {
+        if (Input.touchCount > 0)
+        {
+            //para saber en que posicion de la x estaqmos tocando 
+            float touchscreenpositionx = Input.touches[0].position.x;
+            //para saber cual es el centro de la pantalla
+            float screencenter = Screen.width / 2;
+            if (touchscreenpositionx > screencenter)
+            {
+
+                transform.Translate(velocidad * Time.deltaTime, 0, 0);
+            }
+            if (touchscreenpositionx < screencenter)
+            {
+
+                transform.Translate(-velocidad * Time.deltaTime, 0, 0);
+            }
+        }
+
+
+
+
+    }
     private void checkbestscore() 
     {//para guardar la maxikma puntuacion de manera local no de manera online 
         if(Puntos >=PlayerPrefs.GetInt("bestscore"))
@@ -74,6 +112,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             //Guarda la maxima puntiacion en el computador 
             PlayerPrefs.SetInt("bestscore", Puntos);
             //bestscore = Puntos;
+            PlayerPrefs.DeleteKey("bestscore");
         }
     
     }
