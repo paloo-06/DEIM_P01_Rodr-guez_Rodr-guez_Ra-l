@@ -10,6 +10,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public static int Puntos =5;
     Rigidbody2D rb;
     float velocidad = 4.0f;
+    public GameObject sombra;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,6 +49,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+
+        
         if(collision.gameObject.tag=="Suelo")
         {
         
@@ -56,14 +60,30 @@ public class NewMonoBehaviourScript : MonoBehaviour
         
         }
     }
-   private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "moneda")
+
+        if (collision.gameObject.tag == "rampa")
         {
-            Destroy(collision.gameObject);
-            Puntos ++;
-            Marcadorpuntos.text = ":" + Puntos;
+
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            Invoke("FinSalto", 0.5f);
+            sombra.SetActive(true);
+            velocidad = 0;
+            transform.Translate(velocidad * Time.deltaTime, 0, 0);
+           
+            
         }
+       
+         
+
+        
+            if (collision.gameObject.tag == "moneda")
+            {
+            Destroy(collision.gameObject);
+            Puntos++;
+            Marcadorpuntos.text = ":" + Puntos;
+            }
     }
 
     private void FingerMovement()
@@ -115,6 +135,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
             PlayerPrefs.DeleteKey("bestscore");
         }
     
+    }
+    private void FinSalto()
+    {
+
+        transform.localScale = new Vector3(1, 1, 1);
+        sombra.SetActive(false);
+        velocidad = 4;
     }
 
     

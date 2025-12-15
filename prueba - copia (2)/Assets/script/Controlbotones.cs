@@ -8,6 +8,10 @@ public class Controlbotones : MonoBehaviour
     public RectTransform botonjugar;
     public Ease botonjugarease;
     public Image fadeScreen;
+    public RectTransform botonsalir;
+    public Ease botonsalirease;
+    public Ease botonempezarease;
+    public RectTransform botonempezar;
     
     private void Start()
     {
@@ -19,6 +23,8 @@ public class Controlbotones : MonoBehaviour
 
                 //hace que el boton comience a brivar
                 botonjugar.DOShakePosition(1, 9, vibrato: 100).SetLoops(-1);
+                botonsalir.DOScale(1,2).SetEase(botonsalirease);
+                botonempezar.DOScale(1,2).SetEase (botonempezarease);
             });
         });
     }    

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Levelpiece Variant 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3273061588950877403, guid: e1359928383bb754dae37e9b2be21b27, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6381886881852620169, guid: e1359928383bb754dae37e9b2be21b27, type: 3}
       propertyPath: m_TagString
       value: moneda

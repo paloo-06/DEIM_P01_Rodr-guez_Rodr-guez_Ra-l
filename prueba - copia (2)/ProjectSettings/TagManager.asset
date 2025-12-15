@@ -9,6 +9,7 @@ TagManager:
   - transport
   - enemigo
   - moneda
+  - rampa
   layers:
   - Default
   - TransparentFX
